@@ -14,11 +14,9 @@ const guestSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
-      required: true
     },
     time: {
       type: String,
-      required: true
     },
     message: {
       type: String
@@ -40,16 +38,15 @@ const spotSchema = new mongoose.Schema(
     },
       address: {
         type: String,
-        required: true
     },
     category: {
       type: String,
       required: true,
       enum: [
-        'Restaurant', 'Bar', 'Concert', 'MovieTheater', 'CoffeeShop', 
-        'Sports', 'OutdoorActivity', 'Spa', 'Experience', 'Workshop', 
-        'Class', 'ArtGallery', 'Museum', 'AmusementPark', 'EscapeRoom', 
-        'ComedyClub', 'WineTasting', 'Trip'
+        'Restaurant', 'Bar', 'NightClub', 'Party', 'CoffeeShop', 'WineTasting',
+        'Concert', 'ComedyClub', 'MovieTheater', 'EscapeRoom', 'AmusementPark',
+         'ArtGallery', 'Museum', 'Theater', 'Exhibition', 'Sports', 'OutdoorActivity', 'Ski',
+        'Spa', 'Workshop', 'Class', 'Trip', 'Camping',
       ]
     },
     dresscode: {
