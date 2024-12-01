@@ -34,8 +34,14 @@ router.get('/', async (req, res) => {
     }
 })
 
-
-
+router.get('/:spotId', async (req, res) => {
+    try {
+        const spot = await Spot.findById(req.params.spotId).populate('author');
+        res.status(200).json(spot);
+    } catch (error){
+        res.status(500).json(error);
+    }
+})
 
 
 
