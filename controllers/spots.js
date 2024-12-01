@@ -23,6 +23,17 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/', async (req, res) => {
+    try {
+        const spots = await Spot.find({}) 
+        .populate('author')                          // The populate() method in Mongoose is used to replace a reference field in a document (like an ID) with the actual data from the referenced document.
+        .sort({ createdAt: 'desc' });
+        res.status(200).json(spots)
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
 
 
 
