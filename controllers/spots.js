@@ -89,7 +89,17 @@ router.post('/:spotId/guests', async (req, res) => {
     }
 })
 
-
+router.put('/:spotId/guests/:guestId', async (req, res) => {
+    try {
+        const spot = await Spot.findById(req.params.spotId)                     // Find the parent document that holds an array of Guests.
+        const guest = spot.guests.id(req.params.guestId)                        // Find the specific guest we wish to update within the array. To do so, we will use the MongooseDocumentArray(SPOT).prototype(GUEST).id()(ID(REQ.PARAMS.GUESTID)) method. This method is called on the array of a document, and returns an embedded subdocument based on the provided ObjectId ( req.params.guestId ).
+        guest.text = req.body.text                                              // Update its text property.
+        await spot.save()                                                       // Save the document (spot).
+        res.status(200).json({ message: 'Ok' })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 
 module.exports = router;
