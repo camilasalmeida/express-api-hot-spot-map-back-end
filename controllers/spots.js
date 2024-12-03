@@ -101,5 +101,16 @@ router.put('/:spotId/guests/:guestId', async (req, res) => {
     }
 })
 
+router.delete('/:spotId/guests/:guestId', async (req, res) => {
+    try {
+        const spot = await Spot.findById(req.params.spotId)                  // Find the parent.
+        spot.guests.remove({ _id: req.params.guestId })                       //
+        await spot.save()
+        res.status(200).json({ message: 'Ok' })
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 module.exports = router;
