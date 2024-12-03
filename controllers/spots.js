@@ -52,7 +52,7 @@ router.put('/:spotId', async (req, res) => {
         const updatedSpot = await Spot.findByIdAndUpdate(                // Update Spot
             req.params.spotId, req.body, { new: true })                  
             updatedSpot._doc.author = req.user;                          // Apend the req.user to the author.
-        res.json(200).json(updatedSpot)
+        res.status(200).json(updatedSpot)
     } catch (error) {
         res.status(500).json(error)
     }
