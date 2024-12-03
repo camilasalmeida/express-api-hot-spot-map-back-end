@@ -75,4 +75,21 @@ router.delete('/:spotId', async (req, res) => {
     }
 })
 
+router.post('/:spotId/guests', async (req, res) => {
+    try {
+        req.body.author = req.user._id                                          // Append the user to the author.
+        const spot = await Spot.findById(req.params.spotId)                     // Find the parent/spot Id.
+        spot.guests.push(req.body)                                              // We will use the push() method to add the new guest data to the guests array inside of the Spot document.
+        await spot.save()                                                       // Save the guest to our database.
+        const newGuest = spot.guests[spot.guests.length - 1]                    // Locate the new Guest using its position at the end of the the spot.guests array.
+        newGuest._doc.author = req.user;                                        // Append the author property with a user object.
+        res.status(200).json(newGuest)
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+
+
+
 module.exports = router;
