@@ -35,15 +35,15 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
     try {
-        const user = await User.findOne({ 
-            $or: [{ username: req.body.identifier }, { email: req.body.identifier }],            // The $or operator makes your query flexible by allowing it to match one field or another, making it ideal for scenarios like logging in with either an email or a username.
-        })
+        const user = await User.findOne({
+            $or: [{ email: req.body.email }, { username: req.body.username }],         // The $or operator makes your query flexible by allowing it to match one field or another, making it ideal for scenarios like logging in with either an email or a username.
+        });
 
         if (user && bcrypt.compareSync(req.body.password, user.hashedPassword)) {
             const token = jwt.sign({ username: user.username, email: user.email, _id: user._id }, process.env.JWT_SECRET);
             res.status(200).json({ token })
         } else {
-            res.status(401).json({ error: 'Invalid identifier or password.' })
+            res.status(401).json({ error: 'Invalid email, username or password.' })
         }
     } catch (error) {
         res.status(400).json({ error: error.message })
