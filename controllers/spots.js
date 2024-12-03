@@ -43,10 +43,20 @@ router.get('/:spotId', async (req, res) => {
     }
 })
 
-
-
-
-
+router.put('/:spotId', async (req, res) => {
+    try{
+        const spot = await Spot.findById(req.params.spotId)             // Retrive the spot we want to update from the database.
+        if (!spot.author.equals(req.user._id)) {                         // Check if the user (this Id) has permission to update the resource.
+        return res.status(403).send('You are not allowed to Update this Spot!')
+        }
+        const updatedSpot = await Spot.findByIdAndUpdate(                // Update Spot
+            req.params.spotId, req.body, { new: true })                  
+            updatedSpot._doc.author = req.user;                          // Apend the req.user to the author.
+        res.json(200).json(updatedSpot)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 
 
