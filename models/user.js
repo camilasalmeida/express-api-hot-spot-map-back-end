@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/                         // Using `match` ensures that only properly formatted email addresses are saved to the database.
     },
     hashedPassword: {
         type: String,

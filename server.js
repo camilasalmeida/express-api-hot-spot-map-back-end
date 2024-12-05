@@ -10,6 +10,7 @@ const testJWTRouter = require('./controllers/test-jwt');
 const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
 const spotsRouter = require('./controllers/spots.js')
+//app.use('/uploads', express.static('uploads'));
 
 mongoose.connect(process.env.MONGODB_URI);
 

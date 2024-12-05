@@ -25,7 +25,10 @@ const guestSchema = new mongoose.Schema(
       type: String,
       enum: ['Pending', 'Confirmed', 'Rejected'],
     },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    image: {
+      type: String,                                                               // Stores the image URL (if uploaded to a cloud service or local directory)
+    },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );
@@ -44,8 +47,8 @@ const spotSchema = new mongoose.Schema(
       required: true,
       enum: [
         'Restaurant', 'Bar', 'NightClub', 'Party', 'CoffeeShop', 'WineTasting',
-        'Concert', 'ComedyClub', 'MovieTheater', 'EscapeRoom', 'AmusementPark',
-         'ArtGallery', 'Museum', 'Theater', 'Exhibition', 'Sports', 'OutdoorActivity', 'Ski',
+        'Concert', 'ComedyClub', 'MovieTheater', 'EscapeRoom', 'AmusementPark', 'Game', 
+         'ArtGallery', 'Museum', 'Theater', 'Exhibition', 'Sports', 'OutdoorActivity', 'Beach','Hike', 'Ski',
         'Spa', 'Workshop', 'Class', 'Trip', 'Camping',
       ]
     },
