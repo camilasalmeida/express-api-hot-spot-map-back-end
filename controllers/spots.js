@@ -7,6 +7,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');                                // Add multer for file uploads
 const upload = multer({ dest: 'uploads/' });                     // Set 'uploads/' as the destination for uploaded files
+const { sendEmail } = require('../services/emailService');
 
 // ========== Public Routes ===========
 
@@ -79,19 +80,33 @@ router.delete('/:spotId', async (req, res) => {
     }
 })
 
+
+//Modify the POST /:spotId/guests endpoint to send an email when a guest is added.
 router.post('/:spotId/guests', async (req, res) => {
     try {
-        req.body.author = req.user._id                                          // Append the user to the author.
-        
-        // if (req.file) {
-        //     req.body.image = `/uploads/${req.file.filename}`;       // Save the image path if provided
-        // }
-        
+        req.body.author = req.user._id                                          // Append the user to the author. 
         const spot = await Spot.findById(req.params.spotId)                     // Find the parent/spot Id.
         spot.guests.push(req.body)                                              // We will use the push() method to add the new guest data to the guests array inside of the Spot document.
         await spot.save()                                                       // Save the guest to our database.
         const newGuest = spot.guests[spot.guests.length - 1]                    // Locate the new Guest using its position at the end of the the spot.guests array.
         newGuest._doc.author = req.user;                                        // Append the author property with a user object.
+        
+        //Send email to the guest
+        const subject = `You're Invited to ${spot.spotName}!`;
+        const text = `Hi ${newGuest.name.toUpperCase()},
+
+You've been invited to ${spot.spotName.toUpperCase()} by ${req.user.username}.
+
+Address: ${spot.address || 'Not provided'}
+Date: ${newGuest.date || 'Not provided'}
+Time: ${newGuest.time || 'Not provided'}
+Message: ${newGuest.message || 'No additional message.'}
+
+Photo: ${newGuest.image ? `See attached photo` : 'No photo provided'}
+
+Please respond to this invitation.`;
+
+        await sendEmail(req.body.email, subject, text);
         res.status(201).json(newGuest)
     } catch (error) {
         res.status(500).json(error);
@@ -133,5 +148,23 @@ router.delete('/:spotId/guests/:guestId', async (req, res) => {
         res.status(500).json(error)
     }
 })
+
+//----------------adding this route ------------------//
+
+router.put('/:spotId/guests/:guestId/respond', async (req, res) => {
+    try {
+        const spot = await Spot.findById(req.params.spotId);
+        const guest = spot.guests.id(req.params.guestId);
+
+        if (!guest) return res.status(404).json({ error: 'Guest not found' });
+
+        guest.status = req.body.status; // Accept or Reject
+        await spot.save();
+
+        res.status(200).json({ message: `Guest has ${req.body.status} the invitation.` });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = router;

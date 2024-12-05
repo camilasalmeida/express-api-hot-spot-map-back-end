@@ -32,8 +32,9 @@ const guestSchema = new mongoose.Schema(
       type: String,                                                               // Stores the image URL (if uploaded to a cloud service or local directory)
     },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  },
-  { timestamps: true }
+  //response: { type: String, enum: ['Yes', 'No', 'Maybe', 'No Response'], default: 'No Response' }, // Track guest's response
+},
+{ timestamps: true }
 );
 
 const spotSchema = new mongoose.Schema(
