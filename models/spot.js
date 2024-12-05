@@ -14,9 +14,11 @@ const guestSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
+      default: null, // Explicitly set to null if not provided
     },
     time: {
       type: String,
+      default: '', // Use an empty string for optional time
     },
     message: {
       type: String
@@ -24,6 +26,7 @@ const guestSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ['Pending', 'Confirmed', 'Rejected'],
+      default: 'Pending', // Default value
     },
     image: {
       type: String,                                                               // Stores the image URL (if uploaded to a cloud service or local directory)
