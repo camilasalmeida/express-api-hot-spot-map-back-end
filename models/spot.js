@@ -50,7 +50,7 @@ const spotSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        'Restaurant', 'Bar', 'NightClub', 'Party', 'CoffeeShop', 'WineTasting',
+        'Restaurant', 'Bar', 'Dinner', 'NightClub', 'Party', 'CoffeeShop', 'WineTasting',
         'Concert', 'ComedyClub', 'MovieTheater', 'EscapeRoom', 'AmusementPark', 'Game', 
          'ArtGallery', 'Museum', 'Theater', 'Exhibition', 'Sports', 'OutdoorActivity', 'Beach','Hike', 'Ski',
         'Spa', 'Workshop', 'Class', 'Trip', 'Camping',
@@ -60,8 +60,19 @@ const spotSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        'Formal', 'Casual', 'Business Casual', 'Smart Casual', 
-        'Black Tie', 'Theme Specific', 'None'
+        'AmusementPark', 'ArtGallery', 'Bar', 'Beach', 'BikeRide', 'BoardGames', 
+        'BoatRide', 'Camping', 'ComedyClub', 'Concert', 'CookingClassSession', 
+        'CookingTogether', 'CoffeeShop', 'DayTrip', 'DigitalDetox', 'Dinner', 
+        'EscapeRoom', 'Exhibition', 'FireplaceChill', 'ForestWalk', 'Game', 
+        'GymSession', 'HolidayMarkets', 'HomeSpa', 'HotStoneMassage', 
+        'IceBathRecoverySession', 'IndoorMovieNight', 'IndoorPhotoshoot', 
+        'ManicureAndPedicureSession', 'MassageSession', 'MeditationSession', 
+        'MiniGolf', 'MovieNight', 'MovieTheater', 'Museum', 'MusicJam', 
+        'NatureWalk', 'NightClub', 'PajamaParty', 'Picnic', 'Potluck', 
+        'Restaurant', 'RooftopSession', 'ScienceMuseum', 'SkiingSession', 
+        'SnowboardingSession', 'SnowfallWatching', 'SpaSession', 'Sports', 
+        'TacoNight', 'Theater', 'Trip', 'VintageShopping', 'VideoGameSession', 
+        'WineTasting', 'WinterSaunaSession',
       ]
     },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
