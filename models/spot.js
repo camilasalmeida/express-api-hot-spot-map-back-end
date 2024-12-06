@@ -1,6 +1,6 @@
 // models/spot.js
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const guestSchema = new mongoose.Schema(
   {
@@ -35,7 +35,7 @@ const guestSchema = new mongoose.Schema(
   //response: { type: String, enum: ['Yes', 'No', 'Maybe', 'No Response'], default: 'No Response' }, // Track guest's response
 },
 { timestamps: true }
-);
+)
 
 const spotSchema = new mongoose.Schema(
   {
@@ -77,9 +77,9 @@ const spotSchema = new mongoose.Schema(
     guests: [guestSchema]
   },
   { timestamps: true }
-);
+)
 
 
-const Spot = mongoose.model('Spot', spotSchema);
+const Spot = mongoose.model('Spot', spotSchema)
 
-module.exports = Spot;
+module.exports = Spot

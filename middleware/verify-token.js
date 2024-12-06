@@ -9,8 +9,8 @@ function verifyToken(req, res, next) {
         req.user = decoded;                         // Assign decoded payload to req.user
         next();                                    // Call next() to invoke the next middleware function
     } catch (error) {
-        res.status(401).json({ error: 'Invalid authorization token.' });
+        res.status(401).json({ error: 'Invalid authorization token.' })
     }
 }
 
-module.exports = verifyToken;
+module.exports = verifyToken
