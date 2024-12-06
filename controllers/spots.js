@@ -104,6 +104,7 @@ router.post('/:spotId/guests', async (req, res) => {
 You've been invited to ${spot.spotName.toUpperCase()} by ${req.user.username}.
 
 Address: ${spot.address || 'Not provided'}
+Category: ${spot.category || 'Not provided'}
 Date: ${newGuest.date || 'Not provided'}
 Time: ${newGuest.time || 'Not provided'}
 Message: ${newGuest.message || 'No additional message.'}

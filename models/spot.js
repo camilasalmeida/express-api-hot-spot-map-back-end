@@ -50,16 +50,6 @@ const spotSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        'Restaurant', 'Bar', 'Dinner', 'NightClub', 'Party', 'CoffeeShop', 'WineTasting',
-        'Concert', 'ComedyClub', 'MovieTheater', 'EscapeRoom', 'AmusementPark', 'Game', 
-         'ArtGallery', 'Museum', 'Theater', 'Exhibition', 'Sports', 'OutdoorActivity', 'Beach','Hike', 'Ski',
-        'Spa', 'Workshop', 'Class', 'Trip', 'Camping',
-      ]
-    },
-    dresscode: {
-      type: String,
-      required: true,
-      enum: [
         'AmusementPark', 'ArtGallery', 'Bar', 'Beach', 'BikeRide', 'BoardGames', 
         'BoatRide', 'Camping', 'ComedyClub', 'Concert', 'CookingClassSession', 
         'CookingTogether', 'CoffeeShop', 'DayTrip', 'DigitalDetox', 'Dinner', 
@@ -73,6 +63,14 @@ const spotSchema = new mongoose.Schema(
         'SnowboardingSession', 'SnowfallWatching', 'SpaSession', 'Sports', 
         'TacoNight', 'Theater', 'Trip', 'VintageShopping', 'VideoGameSession', 
         'WineTasting', 'WinterSaunaSession',
+      ]
+    },
+    dresscode: {
+      type: String,
+      required: true,
+      enum: [
+        'Formal', 'Casual', 'Business Casual', 'Smart Casual', 
+        'Black Tie', 'Theme Specific', 'None'
       ]
     },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
