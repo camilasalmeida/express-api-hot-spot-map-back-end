@@ -43,6 +43,7 @@ router.get('/:spotId', async (req, res) => {
         const spot = await Spot.findById(req.params.spotId)
             .populate('author', 'username')
             .populate('guests.author', 'username');
+
         res.status(200).json(spot)
     } catch (error) {
         res.status(500).json(error)
@@ -121,8 +122,8 @@ Please respond to this invitation.`;
 })
 
 router.put('/:spotId/guests/:guestId', async (req, res) => {
-    console.log('Spot ID:', req.params.spotId, 'Guest ID:', req.params.guestId);
-    console.log('Request Body:', req.body);
+    // console.log('Spot ID:', req.params.spotId, 'Guest ID:', req.params.guestId);
+    // console.log('Request Body:', req.body);
     try {
         const spot = await Spot.findById(req.params.spotId)                     // Find the parent document that holds an array of Guests.
         if (!spot) {
@@ -155,23 +156,5 @@ router.delete('/:spotId/guests/:guestId', async (req, res) => {
         res.status(500).json(error)
     }
 })
-
-//----------------adding this route ------------------//
-
-router.put('/:spotId/guests/:guestId/respond', async (req, res) => {
-    try {
-        const spot = await Spot.findById(req.params.spotId);
-        const guest = spot.guests.id(req.params.guestId);
-
-        if (!guest) return res.status(404).json({ error: 'Guest not found' });
-
-        guest.status = req.body.status; // Accept or Reject
-        await spot.save();
-
-        res.status(200).json({ message: `Guest has ${req.body.status} the invitation.` });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
 module.exports = router;
