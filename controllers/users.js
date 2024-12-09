@@ -35,6 +35,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/signin', async (req, res) => {
+    //console.log("in login")
     try {
         const user = await User.findOne({
             $or: [{ email: req.body.email }, { username: req.body.username }],         // The $or operator makes your query flexible by allowing it to match one field or another, making it ideal for scenarios like logging in with either an email or a username.
