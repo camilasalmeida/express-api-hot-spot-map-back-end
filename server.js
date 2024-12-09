@@ -17,6 +17,9 @@ mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
 
+//console.log('Users router loaded');
+//console.log(require.resolve('./controllers/users'));
+
 app.use(cors());
 app.use(express.json());
 

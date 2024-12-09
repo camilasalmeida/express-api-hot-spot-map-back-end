@@ -108,6 +108,7 @@ Address: ${spot.address || 'Not provided'}
 Category: ${spot.category || 'Not provided'}
 Date: ${newGuest.date || 'Not provided'}
 Time: ${newGuest.time || 'Not provided'}
+Dress Code: ${spot.dresscode || 'Not provided'}
 Message: ${newGuest.message || 'No additional message.'}
 
 Photo: ${newGuest.image ? `See attached photo` : 'No photo provided'}
