@@ -14,10 +14,12 @@ const guestSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
+      required: true,
       default: null, // Explicitly set to null if not provided
     },
     time: {
       type: String,
+      required: true,
       default: '', // Use an empty string for optional time
     },
     message: {
