@@ -13,7 +13,6 @@ router.post('/signup', async (req, res) => {
         const usernameInDatabase = await User.findOne({ username: req.body.username })
         if (usernameInDatabase) {
             return res.json({error: 'Username already taken.'});
-            
         }
 
         const emailInDatabase = await User.findOne({ email: req.body.email });
@@ -35,9 +34,12 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
     try {
+        console.log('testing signin: ',req.body) 
         const user = await User.findOne({
-            $or: [{ email: req.body.email }, { username: req.body.username }],         
+            $or: [{ email: req.body.identifier }, { username: req.body.identifier }],    
+               
         });
+        console.log() 
 
         if (user && bcrypt.compareSync(req.body.password, user.hashedPassword)) {
             const token = jwt.sign({ username: user.username, email: user.email, _id: user._id }, process.env.JWT_SECRET);
